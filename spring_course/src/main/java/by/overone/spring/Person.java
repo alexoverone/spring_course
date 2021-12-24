@@ -1,18 +1,50 @@
 package by.overone.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Objects;
 
+@Component
+@Scope("singleton")
 public class Person {
+
+    @Autowired
+    @Qualifier("cat")
     private Pet pet;
+    @Value("${person.surname}")
     private String surname;
+    @Value("${person.age}")
     private int age;
+//    @Value("Ivanov")
+//    private String surname;
+//    @Value("33")
+//    private int age;
 
-    public Person() {
-    }
+//    public Person() {
+//    }
 
-    public Person(Pet pet) {
+    //    @Autowired
+    public Person(
+//            @Qualifier("cat")
+            Pet pet) {
         System.out.println("Person created");
         this.pet = pet;
+    }
+
+    @PostConstruct
+    public void initMethod() {
+        System.out.println("Init method");
+    }
+
+    @PreDestroy
+    public void destroyMethod() {
+        System.out.println("Destroy method");
     }
 
     public Pet getPet() {

@@ -1,5 +1,8 @@
 package by.overone.spring;
 
+import org.springframework.stereotype.Component;
+
+//@Component
 public class Dog implements Pet {
 
     public Dog() {
